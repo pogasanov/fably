@@ -1,4 +1,4 @@
-import { Header } from "@/components/widgets/ui";
+import { Header } from "@/components/features/Header";
 import { ReactNode } from "react";
 
 type Props = {

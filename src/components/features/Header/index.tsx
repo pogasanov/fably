@@ -1,4 +1,4 @@
-import { Login } from "@/components/features/ui";
+import { Login } from "@/components/features/Login";
 import { Container } from "@/components/shared/ui";
 
 export const Header = () => {
