@@ -6,7 +6,7 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 
 export const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([])
-  const [externalResolve, setExternalResovle] = useState<(() => void) | null>(null)
+  const [externalResolve, setExternalResolve] = useState<(() => void) | null>(null)
 
   const socketUrl = 'ws://localhost:5000/ws';
 
@@ -28,14 +28,14 @@ export const Chat = () => {
       setMessages(messages => [...messages, newMessage])
       if (data.type === MessageType.Narrator) {
         externalResolve && externalResolve()
-        setExternalResovle(null)
+        setExternalResolve(null)
       }
     }
   });
 
   const onSendMessage = useCallback((message: string) => {
     return new Promise<void>((resolve) => {
-      setExternalResovle(resolve)
+      setExternalResolve(resolve)
       sendJsonMessage({ message })
     })
   }, [sendJsonMessage])
