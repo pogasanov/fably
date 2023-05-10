@@ -41,7 +41,7 @@ export const Chat = () => {
   }, [sendJsonMessage])
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <ChatList messages={messages}/>
 
       <SubmitMessageForm

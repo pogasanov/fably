@@ -1,9 +1,7 @@
-import { Layout } from "@/components/widgets/Layout";
-
 export const Landing = () => {
   return (
-    <Layout>
-      Landing
-    </Layout>
+    <div className="min-w-screen min-h-screen flex justify-center items-center">
+      Welcome to Fably
+    </div>
   )
 }

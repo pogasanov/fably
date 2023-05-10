@@ -7,7 +7,7 @@ type Props = {
 
 export default function ChatList({messages}: Props) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full grow">
       {messages.map(message => (
         <ChatMessage key={message.date.valueOf()} date={message.date} type={message.type}>
           {message.message}
