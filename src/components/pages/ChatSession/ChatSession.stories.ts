@@ -13,4 +13,4 @@ const meta: Meta<typeof ChatSession> = {
 export default meta;
 type Story = StoryObj<typeof ChatSession>;
 
-export const Generic: Story = {};
+export const Default: Story = {};

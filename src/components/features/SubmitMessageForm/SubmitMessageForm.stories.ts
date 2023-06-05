@@ -13,4 +13,4 @@ const meta: Meta<typeof SubmitMessageForm> = {
 export default meta;
 type Story = StoryObj<typeof SubmitMessageForm>;
 
-export const Generic: Story = {};
+export const Default: Story = {};
