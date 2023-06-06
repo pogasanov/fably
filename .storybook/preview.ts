@@ -11,6 +11,21 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    options: {
+      storySort: (a, b) => {
+        const sortOrder = [
+          "shared",
+          "entities",
+          "features",
+          "widgets",
+          "pages",
+          "app",
+        ]
+        const aIndex = sortOrder.indexOf(a.title.split('/')[0])
+        const bIndex = sortOrder.indexOf(b.title.split('/')[0])
+        return aIndex - bIndex
+      },
+    },
   },
 };
 
