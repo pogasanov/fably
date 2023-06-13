@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { Sidebar, Header } from "@/components/shared/ui";
+import { Header } from "@/components/shared/ui";
+import { Sidebar } from "../";
 
 type Props = {
   children: ReactNode
