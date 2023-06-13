@@ -8,10 +8,15 @@ const parseResponse = (response: Response) => {
 }
 
 const makeRequest = (url: RequestInfo | URL, method: Method, body?: Record<string, any>) => {
-  return fetch(url, {
+  if (!process.env.NEXT_PUBLIC_BACKEND_URL) {
+    throw Error("Please specify NEXT_PUBLIC_BACKEND_URL")
+  }
+
+  return fetch(process.env.NEXT_PUBLIC_BACKEND_URL + url, {
     headers: {
       "Content-Type": "application/json"
     },
+    method,
     body: body ? JSON.stringify(body) : undefined
   }).then(parseResponse)
 }

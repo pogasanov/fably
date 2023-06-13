@@ -1,7 +1,5 @@
-"use client"
-
-import { ChatSession } from "@/components/pages/ChatSession";
+import { SessionPage } from "@/components/pages/session";
 
 export default function Page() {
-  return <ChatSession/>
+  return <SessionPage/>
 }

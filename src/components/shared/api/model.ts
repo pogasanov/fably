@@ -4,7 +4,7 @@ export enum MessageType {
   System = "system",
 }
 
-export type Message = {
+export type ReceivedMessage = {
   message: string,
   date: Date,
   type: MessageType,
