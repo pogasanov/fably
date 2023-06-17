@@ -1,11 +1,13 @@
 import { Message } from "./Message";
-import { getSessionHistory } from "@/components/entities/session";
+import { getSessionHistory } from "../../api/history";
+// import { useSessionStore } from "../../model/store";
 
 type Props = {
   session_id: string
 }
 
 export const Chat = async ({ session_id }: Props) => {
+  // const { messages, fetch } = useSessionStore(state => ({ messages: state.messages, fetch: state.fetch }))
   const messages = await getSessionHistory(session_id)
 
   return (

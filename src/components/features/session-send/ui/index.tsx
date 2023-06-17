@@ -2,6 +2,8 @@
 
 import { Button, Textarea } from "@/components/shared/ui";
 import { FormEvent, useMemo, useState } from "react";
+import { sendMessageToSession } from "@/components/features/session-send/api";
+import { useSessionStore } from "@/components/entities/session";
 
 type Props = {
   disabled: boolean,
@@ -10,11 +12,16 @@ type Props = {
 export const SubmitMessageForm = ({ disabled }: Props) => {
   const [input, setInput] = useState("Describe what I see")
   const [isLoading, setIsLoading] = useState(false)
+  const store = useSessionStore()
 
-  const makeRequest = (e: FormEvent<HTMLFormElement>) => {
+  const makeRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    // sendMessage(input).finally(() => setIsLoading(false))
+    store.addVisitorMessage(input)
+    for await (const val of sendMessageToSession(input)) {
+      store.addAIMessage(val)
+    }
+    setIsLoading(false)
   }
 
   const isDisabled = useMemo(() => isLoading || disabled, [isLoading, disabled])

@@ -3,9 +3,14 @@ import Link from "next/link";
 import { getSessions } from "@/components/entities/session";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/shared/ui";
+import { ErrorBoundary } from "react-error-boundary";
+import { FallbackError } from "@/components/shared/ui/FallbackError";
 
 const SessionsList = async () => {
-  const sessions = await getSessions()
+  const sessions = await getSessions().catch(e => {
+    console.log('failing')
+    throw e
+  })
   return (
     <ul className="space-y-2 font-medium">
       {sessions.map(s => (
@@ -53,9 +58,11 @@ const Sidebar = () => {
         </Link>
       </div>
       <div className="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800">
-        <Suspense fallback={<SessionsListLoading/>}>
-          <SessionsList/>
-        </Suspense>
+        <ErrorBoundary FallbackComponent={FallbackError}>
+          <Suspense fallback={<SessionsListLoading/>}>
+            <SessionsList/>
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </aside>
   )
