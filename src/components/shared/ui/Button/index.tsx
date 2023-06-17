@@ -5,29 +5,25 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/components/shared/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
+  "inline-flex items-center justify-center font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "underline-offset-4 hover:underline text-primary",
+        primary: "bg-stemgreen-500 hover:bg-stemgreen-400 active:bg-stemgreen-300 text-dayblue-900",
+        secondary: "bg-nobleblack-500 border-[3px] border-stemgreen-500 hover:border-stemgreen-400 active:border-stemgreen-300 text-stemgreen-500 hover:text-stemgreen-400 active:text-stemgreen-300",
+        tertiary: "bg-nobleblack-600 hover:bg-nobleblack-500 active:bg-nobleblack-400 text-nobleblack-300 hover:text-nobleblack-200 active:text-nobleblack-100",
+        ghost: "text-nobleblack-400 hover:text-nobleblack-300 active:text-nobleblack-200",
+        glass: "text-nobleblack-300 hover:text-nobleblack-200 active:text-nobleblack-100",
       },
       size: {
-        default: "h-10 py-2 px-4",
-        sm: "h-9 px-3 rounded-md",
-        lg: "h-11 px-8 rounded-md",
+        large: "py-3 px-6 text-bl rounded-xl",
+        medium: "py-2.5 px-4 text-bm rounded-[0.625rem]",
+        small: "py-[0.4375rem] px-3 text-bs rounded-lg"
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "primary",
+      size: "large",
     },
   }
 )
