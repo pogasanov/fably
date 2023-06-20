@@ -1,12 +1,7 @@
 import Image from 'next/image'
 import AbstractImage from './abstract1.png'
-import { Input } from "@/components/shared/ui/Input";
-import { Button } from "@/components/shared/ui";
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
-import { CheckboxWithLabel } from "@/components/shared/ui/Checkbox";
-import { FiLock, FiMail } from "react-icons/fi";
+import { AppleLoginButton, EmailLoginForm, GoogleLoginButton } from "@/components/features/auth/login";
 
 export const LoginPage = () => {
   return (
@@ -23,27 +18,15 @@ export const LoginPage = () => {
             </div>
 
             <div>
-              <form className="flex flex-col gap-6">
-                <Input Icon={FiMail} placeholder="Email"/>
-                <Input Icon={FiLock} placeholder="Password"/>
-                <div className="flex flex-col md:flex-row gap-4 justify-between my-6">
-                  <div><CheckboxWithLabel id="rememberme">Remember me</CheckboxWithLabel></div>
-                  <Link
-                    className="text-bl font-semibold bg-gradient-to-tr from-heisenbergblue-500 to-stemgreen-500 text-transparent bg-clip-text"
-                    href="/">Forgot Password?</Link>
-                </div>
-                <Button>Log in</Button>
-              </form>
+              <EmailLoginForm/>
               <div className="my-12 flex items-center gap-4 text-nobleblack-400 text-bs font-medium relative">
                 <div className="bg-nobleblack-500 h-px flex-1" aria-hidden="true"></div>
                 <span>or continue with</span>
                 <div className="bg-nobleblack-500 h-px flex-1" aria-hidden="true"></div>
               </div>
               <div className="flex flex-col md:flex-row justify-around gap-6">
-                <Button variant="tertiary" className="flex-1"><FcGoogle size={20} className="mr-3"/> Google
-                  Account</Button>
-                <Button variant="tertiary" className="flex-1"><FaApple size={20} className="mr-3 fill-white"/> Apple
-                  Account</Button>
+                <GoogleLoginButton/>
+                <AppleLoginButton/>
               </div>
             </div>
           </div>
