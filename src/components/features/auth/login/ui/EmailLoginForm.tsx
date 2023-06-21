@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/shared/ui/Form";
+import { emailLogin } from "../api";
 
 const formSchema = z.object({
   email: z.string().min(2).max(50),
@@ -34,7 +35,7 @@ const EmailLoginForm = () => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    emailLogin(values.email, values.password).finally(console.log)
   }
 
   return (
