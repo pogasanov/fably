@@ -1,0 +1,1 @@
+export { supabaseMiddleware } from './supabase'

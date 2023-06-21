@@ -1,1 +1,1 @@
-export { EmailLoginForm, GoogleLoginButton, AppleLoginButton } from './ui'
+export { EmailLoginForm, GoogleLoginButton, AppleLoginButton, LinkToLogin } from './ui'

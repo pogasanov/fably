@@ -1,13 +1,17 @@
 import Image from 'next/image'
 import AbstractImage from './abstract1.png'
-import Link from "next/link";
 import { AppleLoginButton, EmailLoginForm, GoogleLoginButton } from "@/components/features/auth/login";
+import { LinkToSignup } from "@/components/features/auth/signup";
 
 export const LoginPage = () => {
   return (
     <div className="flex min-h-screen">
-      <div className="flex-1 flex flex-col justify-center">
-        <div className="flex flex-col items-center justify-center mt-auto">
+      <div className="flex-1 flex flex-col justify-between">
+        <div className="m-12 text-bl font-semibold text-nobleblack-400">
+          &nbsp;
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
           <div className="w-full max-w-[512px] px-2">
             <div className="mb-16">
               <h1 className="text-hxl mb-6 text-white">Let&apos;s get <em
@@ -32,10 +36,8 @@ export const LoginPage = () => {
           </div>
         </div>
 
-        <div className="m-12 text-bl font-semibold text-nobleblack-400 mt-auto">
-          Don&apos;t have an account? <Link
-          className="bg-gradient-to-tr from-heisenbergblue-500 to-stemgreen-500 text-transparent bg-clip-text" href="/">Sign
-          Up</Link>
+        <div className="m-12 text-bl font-semibold text-nobleblack-400">
+          Don&apos;t have an account? <LinkToSignup/>
         </div>
       </div>
       <div className="flex-1 relative hidden xl:block">

@@ -1,0 +1,1 @@
+export { supabaseGET } from './supabase'
