@@ -11,7 +11,7 @@ export const Chat = async ({ session_id }: Props) => {
   const messages = await getSessionHistory(session_id)
 
   return (
-    <div className="flex flex-col items-start gap-2 w-full h-full p-2">
+    <div className="flex grow flex-col-reverse items-start gap-6 w-full overflow-y-auto">
       {messages.map(message => (
         <Message key={message.date.valueOf()} date={message.date} type={message.type}>
           {message.message}

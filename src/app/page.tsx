@@ -1,5 +1,5 @@
-import { Landing } from "@/components/pages/Landing";
 import { Layout } from "@/components/widgets/layout";
+import { SessionDetail } from "@/components/widgets/session-detail";
 
 export const metadata = {
   title: 'Fably',
@@ -9,7 +9,7 @@ export const metadata = {
 export default function Page() {
   return (
     <Layout>
-      Hey
+      <SessionDetail session_id="1"/>
     </Layout>
   )
 }

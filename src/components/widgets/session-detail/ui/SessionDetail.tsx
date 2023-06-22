@@ -8,12 +8,10 @@ type Props = {
 
 export const SessionDetail = ({ session_id }: Props) => {
   return (
-    <div className="flex flex-col h-full grow">
-      <div className="grow">
-        <Suspense fallback={<ChatLoading/>}>
-          <Chat session_id={session_id}/>
-        </Suspense>
-      </div>
+    <div className="flex flex-col h-full grow gap-6">
+      <Suspense fallback={<ChatLoading/>}>
+        <Chat session_id={session_id}/>
+      </Suspense>
 
       <SubmitMessageForm
         disabled={false}

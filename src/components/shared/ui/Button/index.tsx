@@ -3,6 +3,8 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/components/shared/lib/utils"
+import { IconType } from "react-icons";
+import { useMemo } from "react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
@@ -20,7 +22,27 @@ const buttonVariants = cva(
         medium: "py-2.5 px-4 text-bm rounded-[0.625rem]",
         small: "py-[0.4375rem] px-3 text-bs rounded-lg"
       },
+      type: {
+        icon: "",
+      }
     },
+    compoundVariants: [
+      {
+        size: "large",
+        type: "icon",
+        className: "px-3"
+      },
+      {
+        size: "medium",
+        type: "icon",
+        className: "px-2.5"
+      },
+      {
+        size: "small",
+        type: "icon",
+        className: "px-[0.4375rem]"
+      },
+    ],
     defaultVariants: {
       variant: "primary",
       size: "large",
@@ -30,19 +52,38 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+    Omit<VariantProps<typeof buttonVariants>, "type"> {
+  asChild?: boolean,
+  Icon?: React.ComponentType<React.ComponentProps<IconType>>
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, Icon, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    const onlyIcon = useMemo(() => !React.isValidElement(children), [children])
+    const iconSize = useMemo(() => {
+      switch (size) {
+        case "small": {
+          return 16
+        }
+        case "medium": {
+          return 20
+        }
+        default: {
+          return 24
+        }
+      }
+    }, [size])
+    console.log(iconSize)
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, className, type: onlyIcon ? "icon" : undefined }))}
         ref={ref}
         {...props}
-      />
+      >
+        {Icon && <Icon size={iconSize}/>}
+        {children}
+      </Comp>
     )
   }
 )

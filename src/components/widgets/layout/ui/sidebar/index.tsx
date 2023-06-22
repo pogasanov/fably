@@ -12,7 +12,6 @@ import { Suspense } from "react";
 import { FallbackError } from "@/components/shared/ui/FallbackError";
 
 const SessionsList = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 10000))
   const sessions = await getSessions().catch(e => {
     console.log('failing')
     throw e
