@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Header } from "@/components/shared/ui";
 import { Sidebar } from "../";
 
 type Props = {
@@ -9,13 +8,11 @@ type Props = {
 export const Layout = (props: Props) => {
   const { children } = props
   return (
-    <div>
+    <div className="p-3 bg-nobleblack-700">
       <Sidebar/>
 
       <main className="sm:pl-64 h-screen w-screen">
         <div className="h-full w-full flex flex-col">
-          <Header/>
-
           {children}
         </div>
       </main>

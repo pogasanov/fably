@@ -1,68 +1,116 @@
 import * as React from "react"
 import Link from "next/link";
 import { getSessions } from "@/components/entities/session";
-import { Suspense } from "react";
 import { Skeleton } from "@/components/shared/ui";
+import { FiCreditCard, FiPlusCircle, FiSettings } from "react-icons/fi";
+import NextLink from "next/link";
+import { IconType } from "react-icons";
+import { Url } from "next/dist/shared/lib/router/router";
+import { cn } from "@/components/shared/lib/utils";
 import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
 import { FallbackError } from "@/components/shared/ui/FallbackError";
 
 const SessionsList = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 10000))
   const sessions = await getSessions().catch(e => {
     console.log('failing')
     throw e
   })
   return (
-    <ul className="space-y-2 font-medium">
+    <>
       {sessions.map(s => (
-        <li key={s}>
-          <Link href={`/chat/${s}`}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-            <svg aria-hidden="true"
-                 className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-              <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-            </svg>
-            <span className="ml-3">{s}</span>
-          </Link>
-        </li>
+        <NavigationItem href={`/${s}`} key={s}>{s}</NavigationItem>
       ))}
-    </ul>
+    </>
   )
 }
 
 const SessionsListLoading = () => {
   return (
-    <ul className="space-y-2 font-medium">
-      <li>
-        <Skeleton className="h-8 w-[120px]"/>
-      </li>
-      <li>
-        <Skeleton className="h-8 w-[80px]"/>
-      </li>
-      <li>
-        <Skeleton className="h-8 w-[100px]"/>
-      </li>
-    </ul>
+    <>
+      <NavigationItem href="/"><Skeleton className="h-5 w-[120px]"/></NavigationItem>
+      <NavigationItem href="/"><Skeleton className="h-5 w-[120px]"/></NavigationItem>
+    </>
+  )
+}
+
+const SidebarElement = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="p-6 border-b-nobleblack-700">
+      {children}
+    </div>
+  )
+}
+
+const SidebarBlock = ({ title, children }: { title: React.ReactNode, children: React.ReactNode }) => {
+  return (
+    <div className="flex flex-col gap-6 py-6 px-2 border-b-nobleblack-700">
+      <h5 className="px-4 text-nobleblack-400 font-semibold text-bs">{title}</h5>
+      <ul className="gap-2 flex flex-col">
+        {children}
+      </ul>
+    </div>
+  )
+}
+
+type NavigationItemProps = {
+  Icon?: React.ComponentType<React.ComponentProps<IconType>>,
+  children: React.ReactNode,
+  href: Url,
+  dim?: boolean,
+}
+
+const NavigationItem = ({ Icon, children, href, dim }: NavigationItemProps) => {
+  return (
+    <li>
+      <NextLink href={href} className="py-[.88rem] px-4 flex gap-4">
+        {Icon && <Icon size={20} className={cn("text-nobleblack-400", { "text-nobleblack-400": dim })}/>}
+        <span
+          className={cn("text-bm font-semibold text-nobleblack-100 hover:text-nobleblack-200", { "text-nobleblack-300 hover:text-nobleblack-400": dim })}>{children}</span>
+      </NextLink>
+    </li>
   )
 }
 
 const Sidebar = () => {
   return (
-    <aside id="logo-sidebar"
-           className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-           aria-label="Sidebar">
-      <div className="h-14 flex">
-        <Link href="/" className="p-4">
+    <aside
+      id="logo-sidebar"
+      className="flex flex-col fixed top-3 left-3 bottom-3 z-40 w-64 bg-nobleblack-800 rounded-[20px] transition-transform -translate-x-full sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+      aria-label="Sidebar"
+    >
+      <SidebarElement>
+        <Link href="/" className="p-4 text-nobleblack-200">
           Fably
         </Link>
-      </div>
-      <div className="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800">
+      </SidebarElement>
+
+      <SidebarBlock title="GENERAL">
+        <NavigationItem href="/" Icon={FiCreditCard}>Billing</NavigationItem>
+      </SidebarBlock>
+
+      <SidebarBlock title="PROJECTS">
         <ErrorBoundary FallbackComponent={FallbackError}>
           <Suspense fallback={<SessionsListLoading/>}>
             <SessionsList/>
           </Suspense>
         </ErrorBoundary>
+        <NavigationItem href="/" Icon={FiPlusCircle} dim>Add new project</NavigationItem>
+      </SidebarBlock>
+
+      <div className="p-2 mt-auto">
+        <div className="p-4 bg-glass shadow-glass rounded-2xl flex justify-between items-center">
+          <div className="flex gap-4">
+            <div className="flex flex-col gap-1">
+              <h6 className="text-bl font-semibold text-white">Ryan Lee</h6>
+              <span className="text-bs font-medium text-stemgreen-500">Premium</span>
+            </div>
+          </div>
+          <NextLink href="/settings">
+            <FiSettings size={24} className="text-nobleblack-400 hover:text-nobleblack-300"/>
+          </NextLink>
+        </div>
       </div>
     </aside>
   )

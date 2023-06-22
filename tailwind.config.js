@@ -169,8 +169,12 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       boxShadow: {
-        "outline-nobleblack": '0px 0px 0px 4px rgba(54, 58, 61, 0.24)',
-        "outline-heisenbergblue": '0px 0px 0px 4px rgba(132, 220, 245, 0.24)',
+        "outline-nobleblack": '0 0 0 4px rgba(54, 58, 61, 0.24)',
+        "outline-heisenbergblue": '0 0 0 4px rgba(132, 220, 245, 0.24)',
+        'glass': '0 8px 12px 0 rgba(255, 255, 255, 0.08) inset, 0 24px 24px -16px rgba(0, 0, 0, 0.12), 16px 24px 64px -24px rgba(255, 255, 255, 0.08) inset',
+      },
+      backgroundImage: {
+        'glass': 'linear-gradient(145deg, rgba(215, 237, 237, 0.16) 0%, rgba(204, 235, 235, 0.00) 100%)'
       }
     },
   },

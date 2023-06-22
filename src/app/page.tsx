@@ -1,4 +1,5 @@
 import { Landing } from "@/components/pages/Landing";
+import { Layout } from "@/components/widgets/layout";
 
 export const metadata = {
   title: 'Fably',
@@ -6,5 +7,9 @@ export const metadata = {
 }
 
 export default function Page() {
-  return <Landing/>
+  return (
+    <Layout>
+      Hey
+    </Layout>
+  )
 }

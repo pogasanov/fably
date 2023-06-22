@@ -13,7 +13,7 @@ const buttonVariants = cva(
         secondary: "bg-nobleblack-500 border-[3px] border-stemgreen-500 hover:border-stemgreen-400 active:border-stemgreen-300 text-stemgreen-500 hover:text-stemgreen-400 active:text-stemgreen-300",
         tertiary: "bg-nobleblack-600 hover:bg-nobleblack-500 active:bg-nobleblack-400 text-nobleblack-300 hover:text-nobleblack-200 active:text-nobleblack-100",
         ghost: "text-nobleblack-400 hover:text-nobleblack-300 active:text-nobleblack-200",
-        glass: "text-nobleblack-300 hover:text-nobleblack-200 active:text-nobleblack-100",
+        glass: "bg-glass shadow-glass text-nobleblack-300 hover:text-nobleblack-200 active:text-nobleblack-100",
       },
       size: {
         large: "py-3 px-6 text-bl rounded-xl",
