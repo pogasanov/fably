@@ -74,7 +74,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         }
       }
     }, [size])
-    console.log(iconSize)
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className, type: onlyIcon ? "icon" : undefined }))}

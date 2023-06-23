@@ -19,7 +19,7 @@ const SessionsList = async () => {
   return (
     <>
       {sessions.map(s => (
-        <NavigationItem href={`/${s}`} key={s}>{s}</NavigationItem>
+        <NavigationItem href={`/chat/${s}`} key={s}>{s}</NavigationItem>
       ))}
     </>
   )
@@ -106,9 +106,11 @@ const Sidebar = () => {
               <span className="text-bs font-medium text-stemgreen-500">Premium</span>
             </div>
           </div>
-          <NextLink href="/settings">
-            <FiSettings size={24} className="text-nobleblack-400 hover:text-nobleblack-300"/>
-          </NextLink>
+          <form action="/api/auth/signout" method="post">
+            <button type="submit">
+              <FiSettings size={24} className="text-nobleblack-400 hover:text-nobleblack-300"/>
+            </button>
+          </form>
         </div>
       </div>
     </aside>

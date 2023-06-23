@@ -16,7 +16,7 @@ export const useSessionStore = create<SessionState>()(
     fetch: (session_id) => getSessionHistory(session_id).then(h => set((state) => ({ messages: h }))),
     addVisitorMessage: (message) => set(
       produce((state) => {
-        state.messages = state.messages.push({
+        state.messages.push({
           message,
           date: new Date(),
           type: MessageType.User
@@ -26,7 +26,7 @@ export const useSessionStore = create<SessionState>()(
     addAIMessage: (message) => set(
       produce((state) => {
         if (state.messages.length === 0 || state.messages[state.messages.length - 1].type !== MessageType.Narrator) {
-          state.messages = state.messages.push({
+          state.messages.push({
             message,
             date: new Date(),
             type: MessageType.Narrator

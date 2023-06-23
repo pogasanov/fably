@@ -1,39 +1,39 @@
-import { MessageType } from "@/components/shared/api";
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/components/shared/lib/utils"
 import { useMemo } from "react";
+
 
 const messageVariants = cva(
   "flex p-4 w-full border border-solid border-nobleblack-600 rounded-2xl",
   {
     variants: {
       type: {
-        [MessageType.Narrator]: "bg-nobleblack-800",
-        [MessageType.System]: "bg-nobleblack-800",
-        [MessageType.User]: "bg-nobleblack-700",
+        user: "bg-nobleblack-800",
+        system: "bg-nobleblack-800",
+        assistant: "bg-nobleblack-700",
       },
     },
     defaultVariants: {
-      type: MessageType.Narrator,
+      type: "assistant",
     },
   }
 )
 
 type Props = VariantProps<typeof messageVariants> & {
   children: string,
-  date: Date,
+  date?: Date,
 }
 
 export const Message = ({ children, type, date }: Props) => {
   const name = useMemo(() => {
-    if (type === MessageType.Narrator) {
+    if (type === "assistant") {
       return "Narrator"
     }
-    if (type === MessageType.User) {
+    if (type === "user") {
       return "You"
     }
-    if (type === MessageType.System) {
+    if (type === "system") {
       return "System"
     }
   }, [type])

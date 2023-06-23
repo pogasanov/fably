@@ -17,6 +17,7 @@ import {
   FormMessage
 } from "@/components/shared/ui/Form";
 import { emailLogin } from "../api";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().min(2).max(50),
@@ -25,6 +26,7 @@ const formSchema = z.object({
 })
 
 const EmailLoginForm = () => {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,7 +37,9 @@ const EmailLoginForm = () => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    emailLogin(values.email, values.password).finally(console.log)
+    emailLogin(values.email, values.password).then(() => {
+      router.push('/')
+    })
   }
 
   return (

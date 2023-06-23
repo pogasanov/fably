@@ -1,5 +1,4 @@
 import { Layout } from "@/components/widgets/layout";
-import { SessionDetail } from "@/components/widgets/session-detail";
 
 export const metadata = {
   title: 'Fably',
@@ -9,7 +8,7 @@ export const metadata = {
 export default function Page() {
   return (
     <Layout>
-      <SessionDetail session_id="1"/>
+      &nbsp;
     </Layout>
   )
 }
