@@ -1,6 +1,5 @@
 import * as React from "react"
 import Link from "next/link";
-import { getSessions } from "@/components/entities/session";
 import { Skeleton } from "@/components/shared/ui";
 import { FiCreditCard, FiPlusCircle, FiSettings } from "react-icons/fi";
 import NextLink from "next/link";
@@ -10,16 +9,24 @@ import { cn } from "@/components/shared/lib/utils";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
 import { FallbackError } from "@/components/shared/ui/FallbackError";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { AddNewSessionForm } from "@/components/features/session-add";
+
 
 const SessionsList = async () => {
-  const sessions = await getSessions().catch(e => {
-    console.log('failing')
-    throw e
-  })
+  const supabase = createServerComponentClient({ cookies })
+  const { data } = await supabase
+    .from('sessions')
+    .select()
+  if (!data) {
+    throw Error("No sessions found")
+  }
+
   return (
     <>
-      {sessions.map(s => (
-        <NavigationItem href={`/chat/${s}`} key={s}>{s}</NavigationItem>
+      {data.map(s => (
+        <NavigationItem href={`/chat/${s.id}`} key={s.id}>{s.id}</NavigationItem>
       ))}
     </>
   )
@@ -95,7 +102,7 @@ const Sidebar = () => {
             <SessionsList/>
           </Suspense>
         </ErrorBoundary>
-        <NavigationItem href="/" Icon={FiPlusCircle} dim>Add new project</NavigationItem>
+        <AddNewSessionForm/>
       </SidebarBlock>
 
       <div className="p-2 mt-auto">

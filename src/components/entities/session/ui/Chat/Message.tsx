@@ -2,6 +2,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/components/shared/lib/utils"
 import { useMemo } from "react";
+import { Dayjs } from "dayjs";
+import "dayjs/plugin/relativeTime";
 
 
 const messageVariants = cva(
@@ -22,7 +24,7 @@ const messageVariants = cva(
 
 type Props = VariantProps<typeof messageVariants> & {
   children: string,
-  date?: Date,
+  date?: Dayjs,
 }
 
 export const Message = ({ children, type, date }: Props) => {
@@ -38,12 +40,19 @@ export const Message = ({ children, type, date }: Props) => {
     }
   }, [type])
 
+  const diff = useMemo(() => {
+    if (!date) {
+      return null
+    }
+    return date.fromNow()
+  }, [date])
+
   return (
     <div className={cn(messageVariants({ type }))}>
       <div className="flex flex-col gap-3">
         <div className="flex gap-4 items-center">
           <h6 className="text-white text-bl font-semibold">{name}</h6>
-          <span className="text-bs font-medium text-nobleblack-400">5 sec ago</span>
+          <span className="text-bs font-medium text-nobleblack-400">{diff}</span>
         </div>
         <div className="text-nobleblack-300 text-bl font-medium">
           {children}

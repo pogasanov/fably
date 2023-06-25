@@ -13,6 +13,7 @@ export const SubmitMessageForm = ({ disabled, session_id }: Props) => {
   const { input, handleInputChange, handleSubmit, isLoading } = useChat({
     id: session_id,
     initialInput: "Describe what I see",
+    body: { session_id }
   })
   return (
     <form

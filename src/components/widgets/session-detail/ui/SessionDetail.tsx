@@ -6,7 +6,6 @@ type Props = {
 }
 
 export const SessionDetail = ({ session_id }: Props) => {
-  console.log('widget')
   return (
     <div className="flex flex-col h-full grow gap-6">
       <Chat session_id={session_id}/>

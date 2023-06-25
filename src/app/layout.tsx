@@ -1,6 +1,7 @@
 import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from "react";
+import '@/components/shared/config/dayjs'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
