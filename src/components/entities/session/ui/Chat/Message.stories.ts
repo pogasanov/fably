@@ -1,7 +1,7 @@
-import { MessageType } from "@/components/shared/api";
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Message } from './Message';
+import { dayjs } from "@/components/shared/config/dayjs";
 
 const meta: Meta<typeof Message> = {
   title: 'entities/session/Message',
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Message>;
 export const Default: Story = {
   args: {
     children: "Hello world",
-    type: MessageType.User,
-    date: new Date(),
+    type: "user",
+    date: dayjs(),
   }
 }

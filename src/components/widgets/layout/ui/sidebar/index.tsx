@@ -18,13 +18,10 @@ const SessionsList = async () => {
   const { data } = await supabase
     .from('sessions')
     .select()
-  if (!data) {
-    throw Error("No sessions found")
-  }
 
   return (
     <>
-      {data.map(s => (
+      {data?.map(s => (
         <NavigationItem href={`/chat/${s.id}`} key={s.id}>{s.id}</NavigationItem>
       ))}
     </>
