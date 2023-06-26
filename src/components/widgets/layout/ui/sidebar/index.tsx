@@ -11,7 +11,6 @@ import { Suspense } from "react";
 import { FallbackError } from "@/components/shared/ui/FallbackError";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { AddNewSessionForm } from "@/components/features/session-add";
 
 
 const SessionsList = async () => {
@@ -102,7 +101,6 @@ const Sidebar = () => {
             <SessionsList/>
           </Suspense>
         </ErrorBoundary>
-        <AddNewSessionForm/>
       </SidebarBlock>
 
       <div className="p-2 mt-auto">
